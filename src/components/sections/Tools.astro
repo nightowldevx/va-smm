@@ -1,0 +1,223 @@
+---
+// src/components/sections/Tools.astro
+import PlatformCard from "../ui/PlatformCard.astro";
+import ToolCard from "../ui/ToolCard.astro";
+import { platforms, tools } from "../../data/tools";
+---
+
+<section id="tools" class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <p
+                class="text-sm font-semibold uppercase tracking-wider mb-4 text-primary-blue"
+            >
+                Platforms & Tools
+            </p>
+            <h2
+                class="text-3xl lg:text-4xl font-semibold tracking-tight text-gray-900 mb-4"
+            >
+                Expert in the tools you need
+            </h2>
+            <p class="text-base text-gray-600 max-w-2xl mx-auto">
+                Proficient in all major social media platforms and the tools
+                that drive efficiency and results.
+            </p>
+        </div>
+
+        <!-- Platforms - Row 1 (Right -> Left) -->
+        <div class="mb-16">
+            <h3 class="text-lg font-medium text-gray-900 mb-8 text-center">
+                Social Media Platforms
+            </h3>
+
+            <div class="overflow-hidden relative" id="platforms-container">
+                <div class="flex gap-6 w-max" id="platforms-track">
+                    <!-- Set 1 -->
+                    {
+                        platforms.map((platform) => (
+                            <div class="w-40 flex-shrink-0">
+                                <PlatformCard platform={platform} />
+                            </div>
+                        ))
+                    }
+                    <!-- Set 2 (Duplicate for continuous loop) -->
+                    {
+                        platforms.map((platform) => (
+                            <div class="w-40 flex-shrink-0">
+                                <PlatformCard platform={platform} />
+                            </div>
+                        ))
+                    }
+                    <!-- Set 3 (Extra buffer) -->
+                    {
+                        platforms.map((platform) => (
+                            <div class="w-40 flex-shrink-0">
+                                <PlatformCard platform={platform} />
+                            </div>
+                        ))
+                    }
+                    <!-- Set 4 (Extra buffer for wide screens) -->
+                    {
+                        platforms.map((platform) => (
+                            <div class="w-40 flex-shrink-0">
+                                <PlatformCard platform={platform} />
+                            </div>
+                        ))
+                    }
+                </div>
+                <!-- Fade gradients for smooth edge appearance -->
+                <div
+                    class="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-white to-transparent pointer-events-none z-10"
+                >
+                </div>
+                <div
+                    class="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-white to-transparent pointer-events-none z-10"
+                >
+                </div>
+            </div>
+        </div>
+
+        <!-- Tools - Row 2 (Left -> Right) -->
+        <div>
+            <h3 class="text-lg font-medium text-gray-900 mb-8 text-center">
+                Marketing & Design Tools
+            </h3>
+            <div class="overflow-hidden relative" id="tools-container">
+                <div class="flex gap-6 w-max" id="tools-track">
+                    <!-- Set 1 -->
+                    {
+                        tools.map((tool) => (
+                            <div class="w-36 flex-shrink-0">
+                                <ToolCard tool={tool} />
+                            </div>
+                        ))
+                    }
+                    <!-- Set 2 -->
+                    {
+                        tools.map((tool) => (
+                            <div class="w-36 flex-shrink-0">
+                                <ToolCard tool={tool} />
+                            </div>
+                        ))
+                    }
+                    <!-- Set 3 -->
+                    {
+                        tools.map((tool) => (
+                            <div class="w-36 flex-shrink-0">
+                                <ToolCard tool={tool} />
+                            </div>
+                        ))
+                    }
+                    <!-- Set 4 -->
+                    {
+                        tools.map((tool) => (
+                            <div class="w-36 flex-shrink-0">
+                                <ToolCard tool={tool} />
+                            </div>
+                        ))
+                    }
+                </div>
+                <!-- Fade gradients -->
+                <div
+                    class="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-white to-transparent pointer-events-none z-10"
+                >
+                </div>
+                <div
+                    class="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-white to-transparent pointer-events-none z-10"
+                >
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    import anime from "animejs";
+
+    // Wait for DOM to be ready
+    document.addEventListener("DOMContentLoaded", () => {
+        // Helper function to calculate width of one set of items
+        const calculateSetWidth = (track: HTMLElement, itemCount: number) => {
+            if (!track || itemCount === 0) return 0;
+
+            const children = Array.from(track.children) as HTMLElement[];
+            const itemsPerSet = children.length / 4; // We duplicated 4 times
+            let width = 0;
+
+            // Get gap from computed style (1.5rem/24px usually, but safer to read it)
+            const trackStyle = window.getComputedStyle(track);
+            const gap = parseFloat(trackStyle.gap || "0") || 24; // fallback to 24px if parsing fails
+
+            for (let i = 0; i < itemsPerSet; i++) {
+                // Use outerWidth logic: width + margin (if any)
+                // Here we use gap, so just width + gap is usually the stride
+                // IMPORTANT: The stride is (itemWidth + gap)
+                width += children[i].offsetWidth + gap;
+            }
+            return width;
+        };
+
+        // --- Platforms Animation (Right -> Left) ---
+        const platformsTrack = document.getElementById("platforms-track");
+        const platformsContainer = document.getElementById(
+            "platforms-container",
+        );
+
+        if (platformsTrack && platformsContainer) {
+            const singleSetWidth = calculateSetWidth(
+                platformsTrack,
+                platformsTrack.childElementCount,
+            );
+
+            // Platforms: Right to Left (0 -> -singleSetWidth)
+            const platformsAnim = anime({
+                targets: platformsTrack,
+                translateX: [0, -singleSetWidth],
+                duration: 20000, // Adjust speed (20s for one full set loop) -- effectively controls speed
+                easing: "linear",
+                loop: true,
+                autoplay: true,
+            });
+
+            // Hover Pause
+            platformsContainer.addEventListener("mouseenter", () => {
+                platformsAnim.pause();
+            });
+
+            platformsContainer.addEventListener("mouseleave", () => {
+                platformsAnim.play();
+            });
+        }
+
+        // --- Tools Animation (Left -> Right) ---
+        const toolsTrack = document.getElementById("tools-track");
+        const toolsContainer = document.getElementById("tools-container");
+
+        if (toolsTrack && toolsContainer) {
+            const singleSetWidth = calculateSetWidth(
+                toolsTrack,
+                toolsTrack.childElementCount,
+            );
+
+            // Tools: Left to Right
+            // Start at -singleSetWidth (showing set 2) and move to 0 (showing set 1)
+            const toolsAnim = anime({
+                targets: toolsTrack,
+                translateX: [-singleSetWidth, 0],
+                duration: 25000,
+                easing: "linear",
+                loop: true,
+                autoplay: true,
+            });
+
+            // Hover Pause
+            toolsContainer.addEventListener("mouseenter", () => {
+                toolsAnim.pause();
+            });
+
+            toolsContainer.addEventListener("mouseleave", () => {
+                toolsAnim.play();
+            });
+        }
+    });
+</script>

@@ -1,0 +1,39 @@
+---
+// src/components/ui/TestimonialCard.astro
+import { Icon } from "astro-icon/components";
+import type { Testimonial } from "../../data/testimonials";
+
+interface Props {
+    testimonial: Testimonial;
+}
+
+const { testimonial } = Astro.props;
+---
+
+<div class="p-8 rounded-2xl bg-gray-100">
+    <div class="flex items-center gap-1 mb-4">
+        {
+            [...Array(testimonial.rating)].map(() => (
+                <Icon name="solar:star-bold" class="w-4 h-4 text-yellow-400" />
+            ))
+        }
+    </div>
+    <p class="text-sm text-gray-600 mb-6 italic leading-relaxed">
+        "{testimonial.text}"
+    </p>
+    <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-gray-300 overflow-hidden">
+            <img
+                src={testimonial.avatar}
+                alt={testimonial.name}
+                class="w-full h-full object-cover"
+            />
+        </div>
+        <div>
+            <p class="text-sm font-medium text-gray-900">{testimonial.name}</p>
+            <p class="text-xs text-gray-500">
+                {testimonial.role}, {testimonial.company}
+            </p>
+        </div>
+    </div>
+</div>

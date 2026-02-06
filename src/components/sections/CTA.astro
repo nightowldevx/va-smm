@@ -1,0 +1,51 @@
+---
+// src/components/cta/CTA.astro
+import { Icon } from "astro-icon/components";
+import { siteData } from "../../data/site";
+---
+
+<section id="contact" class="py-24 bg-gradient-primary-reverse">
+  <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center">
+    <h2
+      class="text-3xl lg:text-4xl font-semibold tracking-tight text-white mb-6"
+    >
+      Ready to grow your social media presence?
+    </h2>
+    <p class="text-lg text-white/80 mb-10 max-w-2xl mx-auto">
+      Let's work together to create a social media strategy that drives real
+      results for your business. Book a free discovery call today.
+    </p>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a
+        href={siteData.bookingUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-medium rounded-full bg-white text-primary-purple transition-all hover:shadow-xl hover:scale-105"
+      >
+        <Icon name="solar:calendar-linear" class="w-5 h-5" />
+        <span>Schedule a Meeting</span>
+      </a>
+      <a
+        href={`mailto:${siteData.email}`}
+        class="inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-medium rounded-full border-2 border-white/30 text-white transition-all hover:bg-white/10"
+      >
+        <Icon name="solar:letter-linear" class="w-5 h-5" />
+        <span>Send an Email</span>
+      </a>
+    </div>
+    <div class="flex items-center justify-center gap-6 mt-12">
+      {
+        siteData.socialLinks.map((social) => (
+          <a
+            href={social.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+          >
+            <Icon name={social.icon} class="w-5 h-5" />
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>

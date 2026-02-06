@@ -1,0 +1,29 @@
+---
+// src/components/sections/Testimonials.astro
+import TestimonialCard from "../ui/TestimonialCard.astro";
+import { testimonials } from "../../data/testimonials";
+---
+
+<section class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <p
+                class="text-sm font-semibold uppercase tracking-wider mb-4 text-primary-blue"
+            >
+                Testimonials
+            </p>
+            <h2
+                class="text-3xl lg:text-4xl font-semibold tracking-tight text-gray-900 mb-4"
+            >
+                What clients say
+            </h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            {
+                testimonials.map((testimonial) => (
+                    <TestimonialCard testimonial={testimonial} />
+                ))
+            }
+        </div>
+    </div>
+</section>

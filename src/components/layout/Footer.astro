@@ -1,0 +1,25 @@
+---
+// src/components/layout/Footer.astro
+import { siteData } from "../../data/site";
+---
+
+<footer class="py-12 bg-gray-900">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div
+            class="flex flex-col md:flex-row items-center justify-between gap-6"
+        >
+            <div class="flex items-center gap-2">
+                <span class="text-lg font-semibold text-white"
+                    >{siteData.name}</span
+                >
+                <span class="text-gray-500">|</span>
+                <span class="text-sm text-gray-400">{siteData.tagline}</span>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+            <p class="text-sm text-gray-500">
+                © 2026 {siteData.name}. All rights reserved.
+            </p>
+        </div>
+    </div>
+</footer>

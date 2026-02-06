@@ -1,0 +1,102 @@
+---
+// src/components/layout/Navbar.astro
+import { Icon } from "astro-icon/components";
+import { siteData } from "../../data/site";
+---
+
+<nav
+    class="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-lg z-50 border-b border-gray-100"
+>
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <a
+                href="#"
+                class="text-lg font-semibold tracking-tight text-primary-purple"
+            >
+                {siteData.name}
+            </a>
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center gap-8">
+                {
+                    siteData.navigation.map((link) => (
+                        <a
+                            href={link.href}
+                            class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
+                        >
+                            {link.label}
+                        </a>
+                    ))
+                }
+                <a
+                    href="#contact"
+                    class="px-5 py-2.5 text-sm font-medium text-white rounded-full bg-gradient-primary transition-all hover:shadow-lg hover:scale-105"
+                >
+                    Book a Call
+                </a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button
+                id="mobile-menu-button"
+                class="md:hidden p-2 text-gray-600 hover:text-gray-900 transition-colors"
+                aria-label="Toggle menu"
+            >
+                <Icon name="solar:hamburger-menu-linear" class="w-6 h-6" />
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div
+        id="mobile-menu"
+        class="hidden md:hidden bg-white border-t border-gray-100"
+    >
+        <div class="px-6 py-4 space-y-3">
+            {
+                siteData.navigation.map((link) => (
+                    <a
+                        href={link.href}
+                        class="block text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors py-2"
+                    >
+                        {link.label}
+                    </a>
+                ))
+            }
+            <a
+                href="#contact"
+                class="block text-center px-5 py-2.5 text-sm font-medium text-white rounded-full bg-gradient-primary transition-all hover:shadow-lg mt-4"
+            >
+                Book a Call
+            </a>
+        </div>
+    </div>
+</nav>
+
+<script>
+    // Mobile menu toggle functionality
+    const mobileMenuButton = document.getElementById("mobile-menu-button");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+        });
+
+        // Close menu when clicking on a link
+        const mobileLinks = mobileMenu.querySelectorAll("a");
+        mobileLinks.forEach((link) => {
+            link.addEventListener("click", () => {
+                mobileMenu.classList.add("hidden");
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener("click", (e) => {
+            if (
+                !mobileMenuButton.contains(e.target as Node) &&
+                !mobileMenu.contains(e.target as Node)
+            ) {
+                mobileMenu.classList.add("hidden");
+            }
+        });
+    }
+</script>

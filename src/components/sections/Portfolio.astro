@@ -1,0 +1,38 @@
+---
+// src/components/sections/Portfolio.astro
+import { Icon } from "astro-icon/components";
+import PortfolioCard from "../ui/PortfolioCard.astro";
+import { portfolioItems } from "../../data/portfolio";
+---
+
+<section id="portfolio" class="py-24 bg-gray-100">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <p
+                class="text-sm font-semibold uppercase tracking-wider mb-4 text-primary-blue"
+            >
+                Portfolio
+            </p>
+            <h2
+                class="text-3xl lg:text-4xl font-semibold tracking-tight text-gray-900 mb-4"
+            >
+                Sample work & results
+            </h2>
+            <p class="text-base text-gray-600 max-w-2xl mx-auto">
+                A glimpse into some of the projects I've worked on and the
+                results achieved for my clients.
+            </p>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {portfolioItems.map((item) => <PortfolioCard item={item} />)}
+        </div>
+        <div class="text-center mt-12">
+            <a
+                class="inline-flex items-center gap-2 text-sm font-medium text-primary-purple transition-colors"
+            >
+                <span>View Full Portfolio</span>
+                <Icon name="solar:arrow-right-linear" class="w-4 h-4" />
+            </a>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,75 @@
+---
+// src/components/hero/Hero.astro
+import { Icon } from 'astro-icon/components';
+import { siteData } from '../../data/site';
+---
+
+<section class="min-h-screen pt-16 flex items-center bg-gradient-hero">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center py-12 lg:py-0">
+      <!-- Left Content -->
+      <div class="order-2 lg:order-1">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6 bg-primary-purple/10">
+          <span class="w-2 h-2 rounded-full animate-pulse bg-primary-blue"></span>
+          <span class="text-xs font-medium text-primary-purple">{siteData.availabilityText}</span>
+        </div>
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-gray-900 mb-6 leading-tight">
+          Hi, I'm <span class="text-primary-purple">{siteData.name}</span>
+        </h1>
+        <p class="text-xl lg:text-2xl font-normal text-gray-600 mb-4 tracking-tight">
+          {siteData.tagline}
+        </p>
+        <p class="text-base lg:text-lg text-gray-500 mb-8 max-w-lg leading-relaxed">
+          I help brands grow their online presence through strategic content creation, community engagement, and data-driven social media management.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a
+            href="#contact"
+            class="inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-medium text-white rounded-full bg-gradient-primary shadow-hero-button transition-all hover:shadow-xl hover:scale-105"
+          >
+            <span>Work With Me</span>
+            <Icon name="solar:arrow-right-linear" class="w-5 h-5" />
+          </a>
+          <a
+            href="#portfolio"
+            class="inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-medium text-gray-700 rounded-full border border-gray-200 bg-white hover:border-gray-300 hover:shadow-md transition-all"
+          >
+            <span>View My Work</span>
+          </a>
+        </div>
+        <div class="flex items-center gap-8 mt-12 pt-8 border-t border-gray-200">
+          {siteData.heroStats.map((stat) => (
+            <div>
+              <p class="text-2xl font-semibold tracking-tight text-primary-purple">{stat.value}</p>
+              <p class="text-sm text-gray-500">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+      <!-- Right Image -->
+      <div class="order-1 lg:order-2 flex justify-center lg:justify-end">
+        <div class="relative">
+          <div class="absolute inset-0 rounded-3xl transform rotate-6 bg-gradient-primary opacity-20"></div>
+          <div class="relative w-72 h-80 sm:w-80 sm:h-96 lg:w-96 lg:h-[480px] rounded-3xl overflow-hidden shadow-hero-image">
+            <img
+              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&h=800&fit=crop&crop=face"
+              alt="Sarah Mitchell - Social Media Marketing VA"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <div class="absolute -bottom-4 -left-4 bg-white rounded-2xl p-4 shadow-xl">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full flex items-center justify-center bg-gradient-primary">
+                <Icon name="solar:verified-check-bold" class="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <p class="text-sm font-medium text-gray-900">Verified Pro</p>
+                <p class="text-xs text-gray-500">Top Rated VA</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

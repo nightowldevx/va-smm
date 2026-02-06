@@ -1,0 +1,25 @@
+---
+// src/components/ui/PlatformCard.astro
+import { Icon } from "astro-icon/components";
+import type { Platform } from "../../data/tools";
+
+interface Props {
+    platform: Platform;
+}
+
+const { platform } = Astro.props;
+---
+
+<div
+    class="flex flex-col items-center p-6 rounded-2xl bg-gray-50 hover:bg-gray-100 transition-colors"
+>
+    <div
+        class="w-12 h-12 rounded-xl flex items-center justify-center mb-3"
+        style={platform.gradient
+            ? `background: ${platform.gradient}`
+            : `background-color: ${platform.bgColor}`}
+    >
+        <Icon name={platform.icon} class="w-6 h-6 text-white" />
+    </div>
+    <p class="text-sm font-medium text-gray-900">{platform.name}</p>
+</div>

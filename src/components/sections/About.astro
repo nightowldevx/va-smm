@@ -1,0 +1,113 @@
+---
+// src/components/about/About.astro
+import { Icon } from "astro-icon/components";
+
+const features = [
+  {
+    icon: "solar:clock-circle-linear",
+    title: "Quick Turnaround",
+    description: "Fast delivery times",
+    bgColor: "bg-primary-purple/10",
+    iconColor: "text-primary-purple",
+  },
+  {
+    icon: "solar:chat-round-dots-linear",
+    title: "Clear Communication",
+    description: "Always in the loop",
+    bgColor: "bg-primary-blue/10",
+    iconColor: "text-primary-blue",
+  },
+  {
+    icon: "solar:chart-2-linear",
+    title: "Data-Driven",
+    description: "Results you can measure",
+    bgColor: "bg-primary-purple/10",
+    iconColor: "text-primary-purple",
+  },
+  {
+    icon: "solar:heart-linear",
+    title: "Dedicated Support",
+    description: "Your success is my priority",
+    bgColor: "bg-primary-blue/10",
+    iconColor: "text-primary-blue",
+  },
+];
+---
+
+<section id="about" class="py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <div>
+        <p
+          class="text-sm font-semibold uppercase tracking-wider mb-4 text-primary-blue"
+        >
+          About Me
+        </p>
+        <h2
+          class="text-3xl lg:text-4xl font-semibold tracking-tight text-gray-900 mb-6"
+        >
+          Passionate about helping brands tell their story
+        </h2>
+        <p class="text-base text-gray-600 mb-6 leading-relaxed">
+          With over 3 years of experience in social media marketing, I've helped
+          businesses across various industries build their online presence and
+          connect with their target audience. My approach combines creativity
+          with data-driven strategies to deliver measurable results.
+        </p>
+        <p class="text-base text-gray-600 mb-8 leading-relaxed">
+          I believe that every brand has a unique story to tell, and my job is
+          to help you share that story in a way that resonates with your
+          audience and drives real business growth.
+        </p>
+        <div class="grid grid-cols-2 gap-6">
+          {
+            features.map((feature) => (
+              <div class="flex items-start gap-3">
+                <div
+                  class={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${feature.bgColor}`}
+                >
+                  <Icon
+                    name={feature.icon}
+                    class={`w-5 h-5 ${feature.iconColor}`}
+                  />
+                </div>
+                <div>
+                  <p class="text-sm font-medium text-gray-900">
+                    {feature.title}
+                  </p>
+                  <p class="text-xs text-gray-500">{feature.description}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+      <div class="relative">
+        <div class="aspect-square rounded-3xl overflow-hidden bg-gray-100">
+          <img
+            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=600&fit=crop"
+            alt="Working on social media"
+            class="w-full h-full object-cover"
+          />
+        </div>
+        <div
+          class="absolute -bottom-6 -right-6 bg-white rounded-2xl p-6 shadow-xl max-w-xs"
+        >
+          <div class="flex items-center gap-1 mb-2">
+            {
+              [...Array(5)].map(() => (
+                <Icon name="solar:star-bold" class="w-4 h-4 text-yellow-400" />
+              ))
+            }
+          </div>
+          <p class="text-sm text-gray-600 italic leading-relaxed">
+            "Sarah transformed our social media presence. Highly recommended!"
+          </p>
+          <p class="text-xs font-medium text-gray-900 mt-2">
+            — Jessica T., E-commerce Brand
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

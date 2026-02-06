@@ -1,0 +1,51 @@
+---
+// src/components/ui/PortfolioCard.astro
+import type { PortfolioItem } from "../../data/portfolio";
+
+interface Props {
+    item: PortfolioItem;
+}
+
+const { item } = Astro.props;
+---
+
+<div
+    class="bg-white rounded-2xl overflow-hidden shadow-card transition-all hover:shadow-xl hover:-translate-y-1"
+>
+    <div class="aspect-video bg-gray-100 relative overflow-hidden">
+        <img
+            src={item.image}
+            alt={item.title}
+            class="w-full h-full object-cover"
+        />
+        <div class="absolute top-4 left-4">
+            <span
+                class="px-3 py-1 text-xs font-medium rounded-full text-white"
+                style={`background-color: ${item.platformColor}`}
+            >
+                {item.platform}
+            </span>
+        </div>
+    </div>
+    <div class="p-6">
+        <h3 class="text-lg font-semibold tracking-tight text-gray-900 mb-2">
+            {item.title}
+        </h3>
+        <p class="text-sm text-gray-600 mb-4">{item.description}</p>
+        <div class="flex items-center gap-6 pt-4 border-t border-gray-100">
+            {
+                item.metrics.map((metric) => (
+                    <div>
+                        <p
+                            class="text-lg font-semibold"
+                            style={`color: ${metric.color}`}
+                        >
+                            {metric.value}
+                        </p>
+                        <p class="text-xs text-gray-500">{metric.label}</p>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</div>

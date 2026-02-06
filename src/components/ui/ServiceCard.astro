@@ -1,0 +1,44 @@
+---
+// src/components/ui/ServiceCard.astro
+import { Icon } from "astro-icon/components";
+import type { Service } from "../../data/services";
+
+interface Props {
+    service: Service;
+}
+
+const { service } = Astro.props;
+---
+
+<div
+    class="bg-white rounded-2xl p-8 shadow-card transition-all hover:shadow-xl hover:-translate-y-1"
+>
+    <div
+        class={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 bg-gradient-to-br ${service.gradientClass}`}
+    >
+        <Icon
+            name={service.icon}
+            class="w-7 h-7"
+            style={`color: ${service.iconColor}`}
+        />
+    </div>
+    <h3 class="text-xl font-semibold tracking-tight text-gray-900 mb-3">
+        {service.title}
+    </h3>
+    <p class="text-sm text-gray-600 mb-4 leading-relaxed">
+        {service.description}
+    </p>
+    <ul class="space-y-2">
+        {
+            service.features.map((feature) => (
+                <li class="flex items-center gap-2 text-sm text-gray-500">
+                    <Icon
+                        name="solar:check-circle-linear"
+                        class="w-4 h-4 text-primary-blue"
+                    />
+                    <span>{feature}</span>
+                </li>
+            ))
+        }
+    </ul>
+</div>
