@@ -60,18 +60,26 @@ To preview the production build locally:
 npm run preview
 ```
 
-## 📂 Project Structure
+## 📁 Project Structure
 
-```text
-/
-├── public/           # Static assets
+```
+va_template/
+├── .astro/          # Astro cache
+├── public/          # Static assets
+│   └── favicon.ico
 ├── src/
-│   ├── components/   # UI components
-│   ├── layouts/      # Layout components
-│   ├── pages/        # Route pages
-│   └── styles/       # Global styles
-├── astro.config.mjs  # Astro configuration
-└── package.json      # Dependencies and scripts
+│   ├── components/  # Reusable components
+│   │   ├── layout/
+│   │   ├── sections/
+│   │   └── ui/
+│   ├── data/        # Data files
+│   ├── layouts/     # Page layouts
+│   ├── pages/       # Route pages
+│   └── styles/      # Global styles
+├── astro.config.mjs
+├── package.json
+├── tailwind.config.mjs
+└── README.md
 ```
 
 **Looking for custom work?** [Get in touch](mailto:nightowldev.freelance@gmail.com)
